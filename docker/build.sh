@@ -113,11 +113,9 @@ clone_repositories() {
     if [ ! -d "src" ]; then
         mkdir -p src
         vcs import src <autoware.repos
-        vcs import src <extra-packages.repos
     else
         echo "Source directory already exists. Updating repositories..."
         vcs import src <autoware.repos
-        vcs import src <extra-packages.repos
         vcs pull src
     fi
 }
@@ -145,12 +143,14 @@ build_images() {
         --set "*.args.SETUP_ARGS=$setup_args" \
         --set "*.args.LIB_DIR=$lib_dir" \
         --set "base.tags=ghcr.io/autowarefoundation/autoware-base:latest" \
-        --set "base-cuda.tags=ghcr.io/autowarefoundation/autoware-base:cuda-latest"
+        --set "base-cuda.tags=ghcr.io/autowarefoundation/autoware-base:cuda-latest"\
+	2>&1 | tee build1.log
     docker buildx bake --load --progress=plain -f "$SCRIPT_DIR/docker-bake.hcl" -f "$SCRIPT_DIR/docker-bake-cuda.hcl" \
         --set "*.context=$WORKSPACE_ROOT" \
         --set "*.ssh=default" \
         --set "*.platform=$platform" \
         --set "*.args.ROS_DISTRO=$rosdistro" \
+        --set "*.args.BASE_IMAGE=$base_image" \
         --set "*.args.AUTOWARE_BASE_IMAGE=$autoware_base_image" \
         --set "*.args.AUTOWARE_BASE_CUDA_IMAGE=$autoware_base_cuda_image" \
         --set "*.args.SETUP_ARGS=$setup_args" \
@@ -171,7 +171,8 @@ build_images() {
         --set "universe-sensing-perception-cuda.tags=ghcr.io/autowarefoundation/autoware:universe-sensing-perception-cuda" \
         --set "universe-devel-cuda.tags=ghcr.io/autowarefoundation/autoware:universe-devel-cuda" \
         --set "universe-cuda.tags=ghcr.io/autowarefoundation/autoware:universe-cuda" \
-        "$target$image_name_suffix"
+        "$target$image_name_suffix"\
+	2>&1 | tee build2.log
     set +x
 }
 

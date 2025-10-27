@@ -179,9 +179,8 @@ main() {
     # Launch the container
     set -x
     docker run -it --rm --net=host ${GPU_FLAG} ${USER_ID} ${MOUNT_X} \
-        -e XAUTHORITY=${XAUTHORITY} -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR -e NVIDIA_DRIVER_CAPABILITIES=all -v /etc/localtime:/etc/localtime:ro \
-        ${WORKSPACE} ${MAP} ${IMAGE} \
-        ${LAUNCH_CMD}
+        -v $HOME/.Xauthority:/root/.Xauthority:ro -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR -e NVIDIA_DRIVER_CAPABILITIES=all -v /etc/localtime:/etc/localtime:ro \
+        ${WORKSPACE} ${MAP} ${IMAGE}
 }
 
 # Execute the main script

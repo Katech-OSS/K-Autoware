@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -e
 
 function cleanup_system() {
     local lib_dir=$1

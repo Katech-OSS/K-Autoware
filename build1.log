@@ -1,0 +1,1000 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading /home/katech/autoware_0412_0918/docker/docker-bake-base.hcl 441B / 441B done
+#1 DONE 0.0s
+Your build is requesting privileges for following possibly insecure capabilities:
+
+ - Forwarding default SSH agent socket
+
+In order to not see this message in the future pass "--allow=ssh" to grant requested privileges.
+
+Your full command with requested privileges:
+
+docker buildx bake --allow=ssh --load --progress=plain -f /home/katech/autoware_0412_0918/docker/docker-bake-base.hcl --set *.context=/home/katech/autoware_0412_0918/docker/.. --set *.ssh=default --set *.platform=linux/arm64 --set *.args.ROS_DISTRO=humble --set *.args.BASE_IMAGE=ros:humble-ros-base-jammy --set *.args.SETUP_ARGS= --set *.args.LIB_DIR=aarch64 --set base.tags=ghcr.io/autowarefoundation/autoware-base:latest --set base-cuda.tags=ghcr.io/autowarefoundation/autoware-base:cuda-latest
+
+To disable filesystem entitlements checks, you can set BUILDX_BAKE_ENTITLEMENTS_FS=0 .
+
+Do you want to grant requested privileges and continue? [y/N] #0 building with "default" instance using docker driver
+
+#1 [base-cuda internal] load build definition from Dockerfile.base
+#1 transferring dockerfile: 1.84kB done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $BASE_IMAGE results in empty or invalid base image name (line 4)
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $BASE_IMAGE results in empty or invalid base image name (line 4)
+#1 DONE 0.1s
+
+#2 [base internal] load metadata for docker.io/library/ros:humble-ros-base-jammy
+#2 DONE 2.5s
+
+#3 [base-cuda internal] load .dockerignore
+#3 transferring context: 357B 0.0s done
+#3 DONE 0.0s
+
+#4 [base-cuda base  1/13] FROM docker.io/library/ros:humble-ros-base-jammy@sha256:3a3534452e220255701ed0ec557dd5f8eb6d085aa4a1ab9d41460a83a975249b
+#4 resolve docker.io/library/ros:humble-ros-base-jammy@sha256:3a3534452e220255701ed0ec557dd5f8eb6d085aa4a1ab9d41460a83a975249b done
+#4 sha256:3a3534452e220255701ed0ec557dd5f8eb6d085aa4a1ab9d41460a83a975249b 2.69kB / 2.69kB done
+#4 sha256:fac6c3982cf7ac8d76f82158ce6b5a9373ce1dc49d8d803ab3dfae33e0e487f8 5.38kB / 5.38kB done
+#4 sha256:2080f71d3725ed4dc54fc1f20ed6097870820a51defb2a45d7f6890978aa3961 2.91kB / 2.91kB done
+#4 ...
+
+#5 [base internal] load build context
+#5 transferring context: 387.26kB 0.1s done
+#5 DONE 0.2s
+
+#4 [base base  1/13] FROM docker.io/library/ros:humble-ros-base-jammy@sha256:3a3534452e220255701ed0ec557dd5f8eb6d085aa4a1ab9d41460a83a975249b
+#4 DONE 0.4s
+
+#6 [base-cuda base  2/13] COPY setup-dev-env.sh ansible-galaxy-requirements.yaml amd64.env arm64.env /autoware/
+#6 DONE 0.1s
+
+#7 [base base  3/13] COPY ansible/ /autoware/ansible/
+#7 DONE 0.2s
+
+#8 [base-cuda base  4/13] COPY docker/scripts/cleanup_apt.sh /autoware/cleanup_apt.sh
+#8 DONE 0.1s
+
+#9 [base-cuda base  5/13] RUN chmod +x /autoware/cleanup_apt.sh
+#9 DONE 0.3s
+
+#10 [base-cuda base  6/13] COPY docker/scripts/cleanup_system.sh /autoware/cleanup_system.sh
+#10 DONE 0.1s
+
+#11 [base base  7/13] RUN chmod +x /autoware/cleanup_system.sh
+#11 DONE 0.4s
+
+#12 [base-cuda base  8/13] WORKDIR /autoware
+#12 DONE 0.1s
+
+#13 [base-cuda base  9/13] RUN rm -f /etc/apt/apt.conf.d/docker-clean   && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' >/etc/apt/apt.conf.d/keep-cache
+#13 DONE 0.4s
+
+#14 [base-cuda base 10/13] RUN --mount=type=cache,target=/var/cache/apt,sharing=locked   apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends   gosu   ssh   && /autoware/cleanup_apt.sh   && mkdir -p ~/.ssh   && ssh-keyscan github.com >> ~/.ssh/known_hosts
+#14 0.831 Get:1 http://ports.ubuntu.com/ubuntu-ports jammy InRelease [270 kB]
+#14 0.847 Get:2 http://packages.ros.org/ros2/ubuntu jammy InRelease [4682 B]
+#14 1.127 Get:3 http://packages.ros.org/ros2/ubuntu jammy/main Sources [1743 kB]
+#14 1.876 Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [128 kB]
+#14 2.118 Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease [127 kB]
+#14 2.363 Get:6 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [129 kB]
+#14 2.609 Get:7 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 Packages [17.2 MB]
+#14 4.444 Get:8 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 Packages [1758 kB]
+#14 4.569 Get:9 http://ports.ubuntu.com/ubuntu-ports jammy/multiverse arm64 Packages [224 kB]
+#14 4.574 Get:10 http://ports.ubuntu.com/ubuntu-ports jammy/restricted arm64 Packages [24.2 kB]
+#14 4.574 Get:11 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 Packages [1585 kB]
+#14 4.583 Get:12 http://packages.ros.org/ros2/ubuntu jammy/main arm64 Packages [1674 kB]
+#14 4.774 Get:13 http://ports.ubuntu.com/ubuntu-ports jammy-updates/restricted arm64 Packages [5192 kB]
+#14 5.338 Get:14 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 Packages [3367 kB]
+#14 5.898 Get:15 http://ports.ubuntu.com/ubuntu-ports jammy-updates/multiverse arm64 Packages [45.9 kB]
+#14 5.899 Get:16 http://ports.ubuntu.com/ubuntu-ports jammy-backports/main arm64 Packages [82.8 kB]
+#14 5.899 Get:17 http://ports.ubuntu.com/ubuntu-ports jammy-backports/universe arm64 Packages [33.3 kB]
+#14 5.900 Get:18 http://ports.ubuntu.com/ubuntu-ports jammy-security/main arm64 Packages [3055 kB]
+#14 6.522 Get:19 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe arm64 Packages [1290 kB]
+#14 6.530 Get:20 http://ports.ubuntu.com/ubuntu-ports jammy-security/multiverse arm64 Packages [49.6 kB]
+#14 6.531 Get:21 http://ports.ubuntu.com/ubuntu-ports jammy-security/restricted arm64 Packages [5000 kB]
+#14 7.662 Fetched 43.0 MB in 7s (5936 kB/s)
+#14 7.662 Reading package lists...
+#14 9.259 Reading package lists...
+#14 9.284 Building dependency tree...
+#14 9.579 Reading state information...
+#14 9.949 The following additional packages will be installed:
+#14 9.950   libcbor0.8 libedit2 libfido2-1 libwrap0 openssh-client openssh-server
+#14 9.950   openssh-sftp-server
+#14 9.952 Suggested packages:
+#14 9.952   keychain libpam-ssh monkeysphere ssh-askpass molly-guard ufw
+#14 9.952 Recommended packages:
+#14 9.952   xauth default-logind | logind | libpam-systemd ncurses-term ssh-import-id
+#14 10.02 The following NEW packages will be installed:
+#14 10.02   gosu libcbor0.8 libedit2 libfido2-1 libwrap0 openssh-client openssh-server
+#14 10.02   openssh-sftp-server ssh
+#14 10.63 0 upgraded, 9 newly installed, 0 to remove and 108 not upgraded.
+#14 10.63 Need to get 2304 kB of archives.
+#14 10.63 After this operation, 7548 kB of additional disk space will be used.
+#14 10.63 Get:1 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libedit2 arm64 3.1-20210910-1build1 [96.0 kB]
+#14 11.63 Get:2 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libcbor0.8 arm64 0.8.0-2ubuntu1 [24.3 kB]
+#14 11.67 Get:3 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libfido2-1 arm64 1.10.0-1 [81.8 kB]
+#14 11.83 Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 openssh-client arm64 1:8.9p1-3ubuntu0.13 [861 kB]
+#14 12.54 Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 openssh-sftp-server arm64 1:8.9p1-3ubuntu0.13 [36.8 kB]
+#14 12.55 Get:6 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libwrap0 arm64 7.6.q-31build2 [47.9 kB]
+#14 12.56 Get:7 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 openssh-server arm64 1:8.9p1-3ubuntu0.13 [414 kB]
+#14 12.68 Get:8 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 ssh all 1:8.9p1-3ubuntu0.13 [4854 B]
+#14 12.68 Get:9 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 gosu arm64 1.14-1ubuntu0.1 [738 kB]
+#14 13.06 debconf: delaying package configuration, since apt-utils is not installed
+#14 13.10 Fetched 2304 kB in 3s (828 kB/s)
+#14 13.13 Selecting previously unselected package libedit2:arm64.
+#14 13.13 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 38110 files and directories currently installed.)
+#14 13.16 Preparing to unpack .../0-libedit2_3.1-20210910-1build1_arm64.deb ...
+#14 13.16 Unpacking libedit2:arm64 (3.1-20210910-1build1) ...
+#14 13.21 Selecting previously unselected package libcbor0.8:arm64.
+#14 13.21 Preparing to unpack .../1-libcbor0.8_0.8.0-2ubuntu1_arm64.deb ...
+#14 13.22 Unpacking libcbor0.8:arm64 (0.8.0-2ubuntu1) ...
+#14 13.25 Selecting previously unselected package libfido2-1:arm64.
+#14 13.25 Preparing to unpack .../2-libfido2-1_1.10.0-1_arm64.deb ...
+#14 13.25 Unpacking libfido2-1:arm64 (1.10.0-1) ...
+#14 13.29 Selecting previously unselected package openssh-client.
+#14 13.29 Preparing to unpack .../3-openssh-client_1%3a8.9p1-3ubuntu0.13_arm64.deb ...
+#14 13.31 Unpacking openssh-client (1:8.9p1-3ubuntu0.13) ...
+#14 13.37 Selecting previously unselected package openssh-sftp-server.
+#14 13.37 Preparing to unpack .../4-openssh-sftp-server_1%3a8.9p1-3ubuntu0.13_arm64.deb ...
+#14 13.37 Unpacking openssh-sftp-server (1:8.9p1-3ubuntu0.13) ...
+#14 13.44 Selecting previously unselected package libwrap0:arm64.
+#14 13.44 Preparing to unpack .../5-libwrap0_7.6.q-31build2_arm64.deb ...
+#14 13.45 Unpacking libwrap0:arm64 (7.6.q-31build2) ...
+#14 13.54 Selecting previously unselected package openssh-server.
+#14 13.55 Preparing to unpack .../6-openssh-server_1%3a8.9p1-3ubuntu0.13_arm64.deb ...
+#14 13.57 Unpacking openssh-server (1:8.9p1-3ubuntu0.13) ...
+#14 13.67 Selecting previously unselected package ssh.
+#14 13.68 Preparing to unpack .../7-ssh_1%3a8.9p1-3ubuntu0.13_all.deb ...
+#14 13.69 Unpacking ssh (1:8.9p1-3ubuntu0.13) ...
+#14 13.76 Selecting previously unselected package gosu.
+#14 13.76 Preparing to unpack .../8-gosu_1.14-1ubuntu0.1_arm64.deb ...
+#14 13.77 Unpacking gosu (1.14-1ubuntu0.1) ...
+#14 13.88 Setting up libcbor0.8:arm64 (0.8.0-2ubuntu1) ...
+#14 13.90 Setting up libedit2:arm64 (3.1-20210910-1build1) ...
+#14 13.92 Setting up libwrap0:arm64 (7.6.q-31build2) ...
+#14 13.94 Setting up gosu (1.14-1ubuntu0.1) ...
+#14 13.95 Setting up libfido2-1:arm64 (1.10.0-1) ...
+#14 13.96 Setting up openssh-client (1:8.9p1-3ubuntu0.13) ...
+#14 14.03 update-alternatives: using /usr/bin/ssh to provide /usr/bin/rsh (rsh) in auto mode
+#14 14.03 update-alternatives: warning: skip creation of /usr/share/man/man1/rsh.1.gz because associated file /usr/share/man/man1/ssh.1.gz (of link group rsh) doesn't exist
+#14 14.04 update-alternatives: using /usr/bin/slogin to provide /usr/bin/rlogin (rlogin) in auto mode
+#14 14.04 update-alternatives: warning: skip creation of /usr/share/man/man1/rlogin.1.gz because associated file /usr/share/man/man1/slogin.1.gz (of link group rlogin) doesn't exist
+#14 14.04 update-alternatives: using /usr/bin/scp to provide /usr/bin/rcp (rcp) in auto mode
+#14 14.04 update-alternatives: warning: skip creation of /usr/share/man/man1/rcp.1.gz because associated file /usr/share/man/man1/scp.1.gz (of link group rcp) doesn't exist
+#14 14.06 Setting up openssh-sftp-server (1:8.9p1-3ubuntu0.13) ...
+#14 14.08 Setting up openssh-server (1:8.9p1-3ubuntu0.13) ...
+#14 14.30 
+#14 14.30 Creating config file /etc/ssh/sshd_config with new version
+#14 14.35 Creating SSH2 RSA key; this may take some time ...
+#14 18.39 3072 SHA256:eI987+ydX8LT+cMlLhbIfxPDDDqkuU2TTivK4S72rD0 root@buildkitsandbox (RSA)
+#14 18.40 Creating SSH2 ECDSA key; this may take some time ...
+#14 18.45 256 SHA256:YreEdvGJja3IlMl3/h5AUylaE2tSvLo9mS/zeKQKzYM root@buildkitsandbox (ECDSA)
+#14 18.45 Creating SSH2 ED25519 key; this may take some time ...
+#14 18.47 256 SHA256:hLK0oRDURAStaGHXHzdp75xCqXb2OXedMgwtT1IthBk root@buildkitsandbox (ED25519)
+#14 18.63 invoke-rc.d: could not determine current runlevel
+#14 18.63 invoke-rc.d: policy-rc.d denied execution of start.
+#14 18.92 Setting up ssh (1:8.9p1-3ubuntu0.13) ...
+#14 18.94 Processing triggers for libc-bin (2.35-0ubuntu3.10) ...
+#14 19.32 Reading package lists...
+#14 19.34 Building dependency tree...
+#14 19.64 Reading state information...
+#14 20.01 0 upgraded, 0 newly installed, 0 to remove and 108 not upgraded.
+#14 20.49 # github.com:22 SSH-2.0-550beff
+#14 20.86 # github.com:22 SSH-2.0-550beff
+#14 21.24 # github.com:22 SSH-2.0-550beff
+#14 21.62 # github.com:22 SSH-2.0-550beff
+#14 21.80 # github.com:22 SSH-2.0-550beff
+#14 DONE 23.1s
+
+#15 [base base 11/13] RUN --mount=type=ssh   --mount=type=cache,target=/var/cache/apt,sharing=locked   ./setup-dev-env.sh -y --module base --no-nvidia --no-cuda-drivers --runtime openadkit   && pip uninstall -y ansible ansible-core   && /autoware/cleanup_apt.sh   && echo "source /opt/ros/humble/setup.bash" > /etc/bash.bashrc
+#15 0.354 [36mRun the setup in non-interactive mode.[m
+#15 0.764 Get:1 http://packages.ros.org/ros2/ubuntu jammy InRelease [4682 B]
+#15 0.997 Get:2 http://packages.ros.org/ros2/ubuntu jammy/main Sources [1743 kB]
+#15 1.729 Get:3 http://ports.ubuntu.com/ubuntu-ports jammy InRelease [270 kB]
+#15 3.132 Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [128 kB]
+#15 3.239 Get:5 http://packages.ros.org/ros2/ubuntu jammy/main arm64 Packages [1674 kB]
+#15 3.460 Get:6 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease [127 kB]
+#15 3.789 Get:7 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [129 kB]
+#15 4.122 Get:8 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 Packages [1758 kB]
+#15 5.082 Get:9 http://ports.ubuntu.com/ubuntu-ports jammy/multiverse arm64 Packages [224 kB]
+#15 5.120 Get:10 http://ports.ubuntu.com/ubuntu-ports jammy/restricted arm64 Packages [24.2 kB]
+#15 5.124 Get:11 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 Packages [17.2 MB]
+#15 8.446 Get:12 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 Packages [3367 kB]
+#15 9.342 Get:13 http://ports.ubuntu.com/ubuntu-ports jammy-updates/multiverse arm64 Packages [45.9 kB]
+#15 9.343 Get:14 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 Packages [1585 kB]
+#15 10.27 Get:15 http://ports.ubuntu.com/ubuntu-ports jammy-updates/restricted arm64 Packages [5192 kB]
+#15 12.07 Get:16 http://ports.ubuntu.com/ubuntu-ports jammy-backports/universe arm64 Packages [33.3 kB]
+#15 12.07 Get:17 http://ports.ubuntu.com/ubuntu-ports jammy-backports/main arm64 Packages [82.8 kB]
+#15 12.31 Get:18 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe arm64 Packages [1290 kB]
+#15 12.32 Get:19 http://ports.ubuntu.com/ubuntu-ports jammy-security/restricted arm64 Packages [5000 kB]
+#15 12.72 Get:20 http://ports.ubuntu.com/ubuntu-ports jammy-security/multiverse arm64 Packages [49.6 kB]
+#15 12.72 Get:21 http://ports.ubuntu.com/ubuntu-ports jammy-security/main arm64 Packages [3055 kB]
+#15 13.47 Fetched 43.0 MB in 13s (3305 kB/s)
+#15 13.47 Reading package lists...
+#15 15.07 Reading package lists...
+#15 15.09 Building dependency tree...
+#15 15.39 Reading state information...
+#15 15.73 The following additional packages will be installed:
+#15 15.73   python3-pip-whl python3-setuptools-whl python3-wheel python3.10-venv
+#15 15.79 The following NEW packages will be installed:
+#15 15.79   python3-pip python3-pip-whl python3-setuptools-whl python3-venv
+#15 15.79   python3-wheel python3.10-venv
+#15 16.36 0 upgraded, 6 newly installed, 0 to remove and 108 not upgraded.
+#15 16.36 Need to get 3813 kB of archives.
+#15 16.36 After this operation, 10.1 MB of additional disk space will be used.
+#15 16.36 Get:1 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 python3-wheel all 0.37.1-2ubuntu0.22.04.1 [32.0 kB]
+#15 16.98 Get:2 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 python3-pip all 22.0.2+dfsg-1ubuntu0.6 [1306 kB]
+#15 18.44 Get:3 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 python3-pip-whl all 22.0.2+dfsg-1ubuntu0.6 [1680 kB]
+#15 18.70 Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 python3-setuptools-whl all 59.6.0-1.2ubuntu0.22.04.3 [789 kB]
+#15 18.78 Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 python3.10-venv arm64 3.10.12-1~22.04.11 [5728 B]
+#15 18.78 Get:6 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 python3-venv arm64 3.10.6-1~22.04.1 [1042 B]
+#15 19.02 debconf: delaying package configuration, since apt-utils is not installed
+#15 19.06 Fetched 3813 kB in 3s (1278 kB/s)
+#15 19.09 Selecting previously unselected package python3-wheel.
+#15 19.09 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 38225 files and directories currently installed.)
+#15 19.12 Preparing to unpack .../0-python3-wheel_0.37.1-2ubuntu0.22.04.1_all.deb ...
+#15 19.13 Unpacking python3-wheel (0.37.1-2ubuntu0.22.04.1) ...
+#15 19.16 Selecting previously unselected package python3-pip.
+#15 19.17 Preparing to unpack .../1-python3-pip_22.0.2+dfsg-1ubuntu0.6_all.deb ...
+#15 19.17 Unpacking python3-pip (22.0.2+dfsg-1ubuntu0.6) ...
+#15 19.31 Selecting previously unselected package python3-pip-whl.
+#15 19.32 Preparing to unpack .../2-python3-pip-whl_22.0.2+dfsg-1ubuntu0.6_all.deb ...
+#15 19.32 Unpacking python3-pip-whl (22.0.2+dfsg-1ubuntu0.6) ...
+#15 19.39 Selecting previously unselected package python3-setuptools-whl.
+#15 19.40 Preparing to unpack .../3-python3-setuptools-whl_59.6.0-1.2ubuntu0.22.04.3_all.deb ...
+#15 19.40 Unpacking python3-setuptools-whl (59.6.0-1.2ubuntu0.22.04.3) ...
+#15 19.48 Selecting previously unselected package python3.10-venv.
+#15 19.48 Preparing to unpack .../4-python3.10-venv_3.10.12-1~22.04.11_arm64.deb ...
+#15 19.49 Unpacking python3.10-venv (3.10.12-1~22.04.11) ...
+#15 19.56 Selecting previously unselected package python3-venv.
+#15 19.56 Preparing to unpack .../5-python3-venv_3.10.6-1~22.04.1_arm64.deb ...
+#15 19.57 Unpacking python3-venv (3.10.6-1~22.04.1) ...
+#15 19.67 Setting up python3-setuptools-whl (59.6.0-1.2ubuntu0.22.04.3) ...
+#15 19.70 Setting up python3-pip-whl (22.0.2+dfsg-1ubuntu0.6) ...
+#15 19.73 Setting up python3-wheel (0.37.1-2ubuntu0.22.04.1) ...
+#15 19.97 Setting up python3-pip (22.0.2+dfsg-1ubuntu0.6) ...
+#15 21.35 Setting up python3.10-venv (3.10.12-1~22.04.11) ...
+#15 21.41 Setting up python3-venv (3.10.6-1~22.04.1) ...
+#15 22.25 Hit:1 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+#15 22.27 Hit:2 http://packages.ros.org/ros2/ubuntu jammy InRelease
+#15 22.42 Hit:3 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease
+#15 22.60 Hit:4 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease
+#15 22.78 Hit:5 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease
+#15 22.97 Reading package lists...
+#15 25.29 Collecting pipx
+#15 25.44   Downloading pipx-1.7.1-py3-none-any.whl (78 kB)
+#15 25.51      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.7/78.7 KB 1.3 MB/s eta 0:00:00
+#15 25.59 Collecting argcomplete>=1.9.4
+#15 25.60   Downloading argcomplete-3.6.2-py3-none-any.whl (43 kB)
+#15 25.61      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.7/43.7 KB 11.1 MB/s eta 0:00:00
+#15 25.61 Requirement already satisfied: packaging>=20 in /usr/lib/python3/dist-packages (from pipx) (21.3)
+#15 25.65 Collecting userpath!=1.9,>=1.6
+#15 25.66   Downloading userpath-1.9.2-py3-none-any.whl (9.1 kB)
+#15 25.73 Collecting platformdirs>=2.1
+#15 25.74   Downloading platformdirs-4.4.0-py3-none-any.whl (18 kB)
+#15 25.79 Collecting tomli
+#15 25.80   Downloading tomli-2.2.1-py3-none-any.whl (14 kB)
+#15 25.88 Collecting click
+#15 25.89   Downloading click-8.3.0-py3-none-any.whl (107 kB)
+#15 25.91      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 107.3/107.3 KB 6.4 MB/s eta 0:00:00
+#15 26.09 Installing collected packages: tomli, platformdirs, click, argcomplete, userpath, pipx
+#15 26.28   WARNING: The scripts activate-global-python-argcomplete, python-argcomplete-check-easy-install-script and register-python-argcomplete are installed in '/root/.local/bin' which is not on PATH.
+#15 26.28   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+#15 26.29   WARNING: The script userpath is installed in '/root/.local/bin' which is not on PATH.
+#15 26.29   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+#15 26.36   WARNING: The script pipx is installed in '/root/.local/bin' which is not on PATH.
+#15 26.36   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+#15 26.36 Successfully installed argcomplete-3.6.2 click-8.3.0 pipx-1.7.1 platformdirs-4.4.0 tomli-2.2.1 userpath-1.9.2
+#15 26.36 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#15 26.80 Success! Added /root/.local/bin to the PATH environment variable.
+#15 26.80 
+#15 26.80 Consider adding shell completions for pipx. Run 'pipx completions' for
+#15 26.80 instructions.
+#15 26.80 
+#15 26.80 You will need to open a new terminal or re-login for the PATH changes to take
+#15 26.80 effect. Alternatively, you can source your shell's config file with e.g.
+#15 26.80 'source ~/.bashrc'.
+#15 26.80 
+#15 26.80 Otherwise pipx is ready to go! ✨ 🌟 ✨
+#15 27.02 creating virtual environment...
+#15 27.11 creating shared libraries...
+#15 31.24 upgrading shared libraries...
+#15 34.05 installing ansible from spec 'ansible==6.*'...
+#15 65.73 done! ✨ 🌟 ✨
+#15 65.73   installed package ansible 6.7.0, installed using Python 3.10.12
+#15 65.73   These apps are now globally available
+#15 65.73     - ansible
+#15 65.73     - ansible-community
+#15 65.73     - ansible-config
+#15 65.73     - ansible-connection
+#15 65.73     - ansible-console
+#15 65.73     - ansible-doc
+#15 65.73     - ansible-galaxy
+#15 65.73     - ansible-inventory
+#15 65.73     - ansible-playbook
+#15 65.73     - ansible-pull
+#15 65.73     - ansible-test
+#15 65.73     - ansible-vault
+#15 65.76 [36mansible-galaxy collection install -f -r /autoware/ansible-galaxy-requirements.yaml [m
+#15 66.33 Starting galaxy collection install process
+#15 66.33 Process install dependency map
+#15 66.33 Starting collection install process
+#15 66.33 Installing 'autoware.dev_env:0.1.0' to '/root/.ansible/collections/ansible_collections/autoware/dev_env'
+#15 66.36 Created collection for autoware.dev_env:0.1.0 at /root/.ansible/collections/ansible_collections/autoware/dev_env
+#15 66.36 autoware.dev_env:0.1.0 was installed successfully
+#15 66.43 [36mansible-playbook autoware.dev_env.openadkit --extra-vars prompt_install_nvidia=n --extra-vars cuda_install_drivers=false --extra-vars ros2_installation_type=ros-base --extra-vars install_devel=N --extra-vars prompt_download_artifacts=N --extra-vars data_dir=/root/autoware_data --extra-vars module=base --extra-vars rosdistro=humble --extra-vars rmw_implementation=rmw_cyclonedds_cpp --extra-vars base_image=ros:humble-ros-base-jammy --extra-vars autoware_base_image=ghcr.io/autowarefoundation/autoware-base:latest --extra-vars autoware_base_cuda_image=ghcr.io/autowarefoundation/autoware-base:cuda-latest --extra-vars cuda_version=12.4 --extra-vars cudnn_version=8.9.7.29-1+cuda12.2 --extra-vars tensorrt_version=10.3.0.26-1+cuda12.5 --extra-vars pre_commit_clang_format_version=17.0.5 [m
+#15 66.89 [WARNING]: No inventory was parsed, only implicit localhost is available
+#15 66.89 [WARNING]: provided hosts list is empty, only localhost is available. Note that
+#15 66.89 the implicit localhost does not match 'all'
+#15 66.94 [WARNING]: running playbook inside collection autoware.dev_env
+#15 67.15 
+#15 67.15 PLAY [Set up source development environments for Autoware Universe] ************
+#15 67.21 
+#15 67.21 TASK [Gathering Facts] *********************************************************
+#15 68.37 ok: [localhost]
+#15 68.38 
+#15 68.38 TASK [Verify OS] ***************************************************************
+#15 68.40 skipping: [localhost]
+#15 68.41 
+#15 68.41 TASK [Print args] **************************************************************
+#15 68.43 ok: [localhost] => {
+#15 68.43     "msg": [
+#15 68.43         {
+#15 68.43             "module": "base"
+#15 68.43         },
+#15 68.43         {
+#15 68.43             "rosdistro": "humble"
+#15 68.43         },
+#15 68.43         {
+#15 68.43             "rmw_implementation": "rmw_cyclonedds_cpp"
+#15 68.43         },
+#15 68.43         {
+#15 68.43             "cuda_version": "12.4"
+#15 68.43         },
+#15 68.43         {
+#15 68.43             "cudnn_version": "8.9.7.29-1+cuda12.2"
+#15 68.43         },
+#15 68.43         {
+#15 68.43             "tensorrt_version": "10.3.0.26-1+cuda12.5"
+#15 68.43         }
+#15 68.43     ]
+#15 68.43 }
+#15 68.45 
+#15 68.45 TASK [autoware.dev_env.rmw_implementation : Get dash-case name of rmw_implementation] ***
+#15 68.81 ok: [localhost]
+#15 68.83 
+#15 68.83 TASK [autoware.dev_env.rmw_implementation : Hold check of ros-humble-rmw-cyclonedds-cpp] ***
+#15 69.19 ok: [localhost]
+#15 69.21 
+#15 69.21 TASK [autoware.dev_env.rmw_implementation : Install ros-humble-rmw-cyclonedds-cpp] ***
+#15 87.96 changed: [localhost]
+#15 87.97 
+#15 87.97 TASK [autoware.dev_env.rmw_implementation : Display warning if ROS 2 RMW package is held] ***
+#15 87.99 skipping: [localhost]
+#15 88.00 
+#15 88.00 TASK [autoware.dev_env.rmw_implementation : Add RMW_IMPLEMENTATION to .bashrc] ***
+#15 88.39 changed: [localhost] => (item=~/.bashrc)
+#15 88.63 changed: [localhost] => (item=/etc/skel/.bashrc)
+#15 88.66 
+#15 88.66 TASK [autoware.dev_env.gdown : Install gdown to download files from CMakeLists.txt] ***
+#15 92.67 changed: [localhost]
+#15 92.69 
+#15 92.69 TASK [autoware.dev_env.kisak_mesa : Install additional dependencies] ***********
+#15 115.7 changed: [localhost]
+#15 115.7 
+#15 115.7 TASK [autoware.dev_env.kisak_mesa : Add Kisak Mesa PPA] ************************
+#15 124.9 changed: [localhost]
+#15 124.9 
+#15 124.9 TASK [autoware.dev_env.kisak_mesa : Install Mesa libraries] ********************
+#15 146.0 changed: [localhost]
+#15 146.0 
+#15 146.0 TASK [autoware.dev_env.pacmod : Install apt-transport-https] *******************
+#15 151.6 changed: [localhost]
+#15 151.6 
+#15 151.6 TASK [autoware.dev_env.pacmod : Save result of 'lsb_release -sc'] **************
+#15 151.9 ok: [localhost]
+#15 151.9 
+#15 151.9 TASK [autoware.dev_env.pacmod : Add AutonomouStuff apt repository to source list] ***
+#15 158.5 changed: [localhost]
+#15 158.5 
+#15 158.5 TASK [autoware.dev_env.pacmod : Add AutonomouStuff rosdep yaml] ****************
+#15 158.7 changed: [localhost]
+#15 158.8 
+#15 158.8 TASK [autoware.dev_env.build_tools : Install ccache] ***************************
+#15 158.8 skipping: [localhost]
+#15 158.8 
+#15 158.8 TASK [autoware.dev_env.build_tools : Add CCACHE_DIR to .bashrc] ****************
+#15 158.8 skipping: [localhost]
+#15 158.8 
+#15 158.8 TASK [autoware.dev_env.build_tools : Add CCACHE_DIR to .bashrc of local user] ***
+#15 158.8 skipping: [localhost]
+#15 158.9 
+#15 158.9 TASK [autoware.dev_env.build_tools : Export CC to ccache] **********************
+#15 158.9 skipping: [localhost]
+#15 158.9 
+#15 158.9 TASK [autoware.dev_env.build_tools : Export CXX to ccache] *********************
+#15 158.9 skipping: [localhost]
+#15 158.9 
+#15 158.9 TASK [autoware.dev_env.build_tools : Create ccache directory] ******************
+#15 158.9 skipping: [localhost]
+#15 158.9 
+#15 158.9 TASK [autoware.dev_env.build_tools : Source .bashrc] ***************************
+#15 159.0 skipping: [localhost]
+#15 159.0 
+#15 159.0 TASK [autoware.dev_env.geographiclib : Install geographiclib-tools] ************
+#15 159.0 skipping: [localhost]
+#15 159.0 
+#15 159.0 TASK [autoware.dev_env.geographiclib : Install egm2008-1] **********************
+#15 159.0 skipping: [localhost]
+#15 159.0 
+#15 159.0 TASK [autoware.dev_env.cuda : Get CUDA architecture name] **********************
+#15 159.0 skipping: [localhost]
+#15 159.1 
+#15 159.1 TASK [autoware.dev_env.cuda : Remove old /etc/apt/sources.list.d/cuda.list] ****
+#15 159.1 skipping: [localhost]
+#15 159.1 
+#15 159.1 TASK [autoware.dev_env.cuda : Install CUDA keyring] ****************************
+#15 159.1 skipping: [localhost]
+#15 159.1 
+#15 159.1 TASK [autoware.dev_env.cuda : Get dash-case name of cuda_version] **************
+#15 159.1 skipping: [localhost]
+#15 159.1 
+#15 159.1 TASK [autoware.dev_env.cuda : Install CUDA devel libraries except for cuda-drivers] ***
+#15 159.2 skipping: [localhost]
+#15 159.2 
+#15 159.2 TASK [autoware.dev_env.cuda : Install CUDA libraries except for cuda-drivers] ***
+#15 159.2 skipping: [localhost]
+#15 159.2 
+#15 159.2 TASK [autoware.dev_env.cuda : Install extra CUDA libraries for x86_64] *********
+#15 159.2 skipping: [localhost]
+#15 159.2 
+#15 159.2 TASK [autoware.dev_env.cuda : Install cuda-drivers] ****************************
+#15 159.2 skipping: [localhost]
+#15 159.3 
+#15 159.3 TASK [autoware.dev_env.cuda : Add PATH to .bashrc] *****************************
+#15 159.3 skipping: [localhost] => (item=~/.bashrc) 
+#15 159.3 skipping: [localhost] => (item=/etc/skel/.bashrc) 
+#15 159.3 
+#15 159.3 TASK [autoware.dev_env.cuda : Add LD_LIBRARY_PATH to bashrc] *******************
+#15 159.3 skipping: [localhost] => (item=~/.bashrc) 
+#15 159.3 skipping: [localhost] => (item=/etc/skel/.bashrc) 
+#15 159.3 
+#15 159.3 TASK [autoware.dev_env.cuda : Create Vulkan directory] *************************
+#15 159.3 skipping: [localhost]
+#15 159.3 
+#15 159.3 TASK [autoware.dev_env.cuda : Create OpenGL directory] *************************
+#15 159.4 skipping: [localhost]
+#15 159.4 
+#15 159.4 TASK [autoware.dev_env.cuda : Create OpenCL directory] *************************
+#15 159.4 skipping: [localhost]
+#15 159.4 
+#15 159.4 TASK [autoware.dev_env.cuda : Register Vulkan GPU vendors] *********************
+#15 159.4 skipping: [localhost]
+#15 159.4 
+#15 159.4 TASK [autoware.dev_env.cuda : Set permissions for Vulkan GPU vendors] **********
+#15 159.4 skipping: [localhost]
+#15 159.5 
+#15 159.5 TASK [autoware.dev_env.cuda : Register OpenGL GPU vendors] *********************
+#15 159.5 skipping: [localhost]
+#15 159.5 
+#15 159.5 TASK [autoware.dev_env.cuda : Set permissions for OpenGL GPU vendors] **********
+#15 159.5 skipping: [localhost]
+#15 159.5 
+#15 159.5 TASK [autoware.dev_env.cuda : Register OpenCL GPU vendors] *********************
+#15 159.5 skipping: [localhost]
+#15 159.5 
+#15 159.5 TASK [autoware.dev_env.cuda : Set permissions for OpenCL GPU vendors] **********
+#15 159.5 skipping: [localhost]
+#15 159.6 
+#15 159.6 TASK [autoware.dev_env.cuda : Get CUDA architecture name] **********************
+#15 159.6 skipping: [localhost]
+#15 159.6 
+#15 159.6 TASK [autoware.dev_env.cuda : Remove old /etc/apt/sources.list.d/cuda.list] ****
+#15 159.6 skipping: [localhost]
+#15 159.6 
+#15 159.6 TASK [autoware.dev_env.cuda : Install CUDA keyring] ****************************
+#15 159.6 skipping: [localhost]
+#15 159.6 
+#15 159.6 TASK [autoware.dev_env.cuda : Get dash-case name of cuda_version] **************
+#15 159.7 skipping: [localhost]
+#15 159.7 
+#15 159.7 TASK [autoware.dev_env.cuda : Install CUDA devel libraries except for cuda-drivers] ***
+#15 159.7 skipping: [localhost]
+#15 159.7 
+#15 159.7 TASK [autoware.dev_env.cuda : Install CUDA libraries except for cuda-drivers] ***
+#15 159.7 skipping: [localhost]
+#15 159.7 
+#15 159.7 TASK [autoware.dev_env.cuda : Install extra CUDA libraries for x86_64] *********
+#15 159.7 skipping: [localhost]
+#15 159.8 
+#15 159.8 TASK [autoware.dev_env.cuda : Install cuda-drivers] ****************************
+#15 159.8 skipping: [localhost]
+#15 159.8 
+#15 159.8 TASK [autoware.dev_env.cuda : Add PATH to .bashrc] *****************************
+#15 159.8 skipping: [localhost] => (item=~/.bashrc) 
+#15 159.8 skipping: [localhost] => (item=/etc/skel/.bashrc) 
+#15 159.8 
+#15 159.8 TASK [autoware.dev_env.cuda : Add LD_LIBRARY_PATH to bashrc] *******************
+#15 159.8 skipping: [localhost] => (item=~/.bashrc) 
+#15 159.8 skipping: [localhost] => (item=/etc/skel/.bashrc) 
+#15 159.9 
+#15 159.9 TASK [autoware.dev_env.cuda : Create Vulkan directory] *************************
+#15 159.9 skipping: [localhost]
+#15 159.9 
+#15 159.9 TASK [autoware.dev_env.cuda : Create OpenGL directory] *************************
+#15 159.9 skipping: [localhost]
+#15 159.9 
+#15 159.9 TASK [autoware.dev_env.cuda : Create OpenCL directory] *************************
+#15 159.9 skipping: [localhost]
+#15 159.9 
+#15 159.9 TASK [autoware.dev_env.cuda : Register Vulkan GPU vendors] *********************
+#15 160.0 skipping: [localhost]
+#15 160.0 
+#15 160.0 TASK [autoware.dev_env.cuda : Set permissions for Vulkan GPU vendors] **********
+#15 160.0 skipping: [localhost]
+#15 160.0 
+#15 160.0 TASK [autoware.dev_env.cuda : Register OpenGL GPU vendors] *********************
+#15 160.0 skipping: [localhost]
+#15 160.0 
+#15 160.0 TASK [autoware.dev_env.cuda : Set permissions for OpenGL GPU vendors] **********
+#15 160.0 skipping: [localhost]
+#15 160.1 
+#15 160.1 TASK [autoware.dev_env.cuda : Register OpenCL GPU vendors] *********************
+#15 160.1 skipping: [localhost]
+#15 160.1 
+#15 160.1 TASK [autoware.dev_env.cuda : Set permissions for OpenCL GPU vendors] **********
+#15 160.1 skipping: [localhost]
+#15 160.1 
+#15 160.1 TASK [autoware.dev_env.tensorrt : Install cuDNN and TensorRT] ******************
+#15 160.1 skipping: [localhost]
+#15 160.1 
+#15 160.1 TASK [autoware.dev_env.tensorrt : Install cuDNN and TensorRT Dev] **************
+#15 160.2 skipping: [localhost]
+#15 160.2 
+#15 160.2 TASK [autoware.dev_env.tensorrt : Prevent CUDA-related packages from upgrading] ***
+#15 160.2 skipping: [localhost] => (item=libcudnn8) 
+#15 160.2 skipping: [localhost] => (item=libnvinfer10) 
+#15 160.2 skipping: [localhost] => (item=libnvinfer-plugin10) 
+#15 160.2 skipping: [localhost] => (item=libnvonnxparsers10) 
+#15 160.2 
+#15 160.2 TASK [autoware.dev_env.tensorrt : Prevent CUDA-related Dev packages from upgrading] ***
+#15 160.2 skipping: [localhost] => (item=libcudnn8-dev) 
+#15 160.3 skipping: [localhost] => (item=libnvinfer-dev) 
+#15 160.3 skipping: [localhost] => (item=libnvinfer-plugin-dev) 
+#15 160.3 skipping: [localhost] => (item=libnvinfer-headers-dev) 
+#15 160.3 skipping: [localhost] => (item=libnvinfer-headers-plugin-dev) 
+#15 160.3 skipping: [localhost] => (item=libnvonnxparsers-dev) 
+#15 160.3 
+#15 160.3 TASK [autoware.dev_env.dev_tools : Install Git LFS] ****************************
+#15 160.3 skipping: [localhost]
+#15 160.3 
+#15 160.3 TASK [autoware.dev_env.dev_tools : Check if git lfs is installed] **************
+#15 160.3 skipping: [localhost]
+#15 160.3 
+#15 160.3 TASK [autoware.dev_env.dev_tools : Setup Git LFS] ******************************
+#15 160.3 skipping: [localhost]
+#15 160.4 
+#15 160.4 TASK [autoware.dev_env.dev_tools : Install pre-commit] *************************
+#15 160.4 skipping: [localhost]
+#15 160.4 
+#15 160.4 TASK [autoware.dev_env.dev_tools : Install clang-format] ***********************
+#15 160.4 skipping: [localhost]
+#15 160.4 
+#15 160.4 TASK [autoware.dev_env.dev_tools : Install Go] *********************************
+#15 160.4 skipping: [localhost]
+#15 160.4 
+#15 160.4 TASK [autoware.dev_env.dev_tools : Hold check of ros-humble-plotjuggler-ros] ***
+#15 160.5 skipping: [localhost]
+#15 160.5 
+#15 160.5 TASK [autoware.dev_env.dev_tools : Install plotjuggler] ************************
+#15 160.5 skipping: [localhost]
+#15 160.5 
+#15 160.5 TASK [autoware.dev_env.dev_tools : Display warning if plotjuggler-ros package is held] ***
+#15 160.5 skipping: [localhost]
+#15 160.5 
+#15 160.5 TASK [autoware.dev_env.ros2_dev_tools : Install apt packages] ******************
+#15 160.5 skipping: [localhost]
+#15 160.5 
+#15 160.5 TASK [autoware.dev_env.ros2_dev_tools : Run 'sudo rosdep init'] ****************
+#15 160.6 skipping: [localhost]
+#15 160.6 
+#15 160.6 TASK [autoware.dev_env.artifacts : Create yabloc_pose_initializer directory inside /root/autoware_data] ***
+#15 160.6 skipping: [localhost]
+#15 160.6 
+#15 160.6 TASK [autoware.dev_env.artifacts : Download yabloc_pose_initializer/resources.tar.gz] ***
+#15 160.6 skipping: [localhost]
+#15 160.6 
+#15 160.6 TASK [autoware.dev_env.artifacts : Extract yabloc_pose_initializer/resources.tar.gz] ***
+#15 160.6 skipping: [localhost]
+#15 160.7 
+#15 160.7 TASK [autoware.dev_env.artifacts : Create image_projection_based_fusion directory inside /root/autoware_data] ***
+#15 160.7 skipping: [localhost]
+#15 160.7 
+#15 160.7 TASK [autoware.dev_env.artifacts : Download image_projection_based_fusion/pts_voxel_encoder_pointpainting.onnx] ***
+#15 160.7 skipping: [localhost]
+#15 160.7 
+#15 160.7 TASK [autoware.dev_env.artifacts : Download image_projection_based_fusion/pts_backbone_neck_head_pointpainting.onnx] ***
+#15 160.7 skipping: [localhost]
+#15 160.7 
+#15 160.7 TASK [autoware.dev_env.artifacts : Download image_projection_based_fusion/detection_class_remapper.param.yaml] ***
+#15 160.8 skipping: [localhost]
+#15 160.8 
+#15 160.8 TASK [autoware.dev_env.artifacts : Download image_projection_based_fusion/pointpainting_ml_package.param.yaml] ***
+#15 160.8 skipping: [localhost]
+#15 160.8 
+#15 160.8 TASK [autoware.dev_env.artifacts : Create lidar_apollo_instance_segmentation directory inside /root/autoware_data] ***
+#15 160.8 skipping: [localhost]
+#15 160.8 
+#15 160.8 TASK [autoware.dev_env.artifacts : Download lidar_apollo_instance_segmentation/vlp-16.onnx] ***
+#15 160.8 skipping: [localhost]
+#15 160.8 
+#15 160.8 TASK [autoware.dev_env.artifacts : Download lidar_apollo_instance_segmentation/hdl-64.onnx] ***
+#15 160.9 skipping: [localhost]
+#15 160.9 
+#15 160.9 TASK [autoware.dev_env.artifacts : Download lidar_apollo_instance_segmentation/vls-128.onnx] ***
+#15 160.9 skipping: [localhost]
+#15 160.9 
+#15 160.9 TASK [autoware.dev_env.artifacts : Create lidar_centerpoint directory inside /root/autoware_data] ***
+#15 160.9 skipping: [localhost]
+#15 160.9 
+#15 160.9 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/pts_voxel_encoder_centerpoint.onnx] ***
+#15 160.9 skipping: [localhost]
+#15 161.0 
+#15 161.0 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/pts_backbone_neck_head_centerpoint.onnx] ***
+#15 161.0 skipping: [localhost]
+#15 161.0 
+#15 161.0 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/pts_voxel_encoder_centerpoint_tiny.onnx] ***
+#15 161.0 skipping: [localhost]
+#15 161.0 
+#15 161.0 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/pts_backbone_neck_head_centerpoint_tiny.onnx] ***
+#15 161.0 skipping: [localhost]
+#15 161.0 
+#15 161.0 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/centerpoint_ml_package.param.yaml] ***
+#15 161.0 skipping: [localhost]
+#15 161.1 
+#15 161.1 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/centerpoint_ml_package.param.yaml] ***
+#15 161.1 skipping: [localhost]
+#15 161.1 
+#15 161.1 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/centerpoint_sigma_ml_package.param.yaml] ***
+#15 161.1 skipping: [localhost]
+#15 161.1 
+#15 161.1 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/detection_class_remapper.param.yaml] ***
+#15 161.1 skipping: [localhost]
+#15 161.1 
+#15 161.1 TASK [autoware.dev_env.artifacts : Download lidar_centerpoint/deploy_metadata.yaml] ***
+#15 161.1 skipping: [localhost]
+#15 161.2 
+#15 161.2 TASK [autoware.dev_env.artifacts : Create lidar_transfusion directory inside /root/autoware_data] ***
+#15 161.2 skipping: [localhost]
+#15 161.2 
+#15 161.2 TASK [autoware.dev_env.artifacts : Download lidar_transfusion/transfusion.onnx] ***
+#15 161.2 skipping: [localhost]
+#15 161.2 
+#15 161.2 TASK [autoware.dev_env.artifacts : Download lidar_transfusion/transfusion_ml_package.param.yaml] ***
+#15 161.2 skipping: [localhost]
+#15 161.2 
+#15 161.2 TASK [autoware.dev_env.artifacts : Download lidar_transfusion/detection_class_remapper.param.yaml] ***
+#15 161.3 skipping: [localhost]
+#15 161.3 
+#15 161.3 TASK [autoware.dev_env.artifacts : Create tensorrt_yolox directory inside /root/autoware_data] ***
+#15 161.3 skipping: [localhost]
+#15 161.3 
+#15 161.3 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox-tiny.onnx] ****
+#15 161.3 skipping: [localhost]
+#15 161.3 
+#15 161.3 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox-sPlus-opt.onnx] ***
+#15 161.3 skipping: [localhost]
+#15 161.3 
+#15 161.3 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox-sPlus-opt.EntropyV2-calibration.table] ***
+#15 161.4 skipping: [localhost]
+#15 161.4 
+#15 161.4 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox-sPlus-T4-960x960-pseudo-finetune.onnx] ***
+#15 161.4 skipping: [localhost]
+#15 161.4 
+#15 161.4 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox-sPlus-T4-960x960-pseudo-finetune.EntropyV2-calibration.table] ***
+#15 161.4 skipping: [localhost]
+#15 161.4 
+#15 161.4 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/label.txt] **********
+#15 161.4 skipping: [localhost]
+#15 161.4 
+#15 161.4 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox-sPlus-opt-pseudoV2-T4-960x960-T4-seg16cls.onnx] ***
+#15 161.5 skipping: [localhost]
+#15 161.5 
+#15 161.5 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox-sPlus-opt-pseudoV2-T4-960x960-T4-seg16cls.EntropyV2-calibration.table] ***
+#15 161.5 skipping: [localhost]
+#15 161.5 
+#15 161.5 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/semseg_color_map.csv] ***
+#15 161.5 skipping: [localhost]
+#15 161.5 
+#15 161.5 TASK [autoware.dev_env.artifacts : Create tensorrt_rtmdet directory inside /root/autoware_data] ***
+#15 161.5 skipping: [localhost]
+#15 161.5 
+#15 161.5 TASK [autoware.dev_env.artifacts : Download tensorrt_rtmdet_onnx_models.tar.gz] ***
+#15 161.6 skipping: [localhost]
+#15 161.6 
+#15 161.6 TASK [autoware.dev_env.artifacts : Extract tensorrt_rtmdet_onnx_models.tar.gz] ***
+#15 161.6 skipping: [localhost]
+#15 161.6 
+#15 161.6 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox_s_car_ped_tl_detector_960_960_batch_1.onnx] ***
+#15 161.6 skipping: [localhost]
+#15 161.6 
+#15 161.6 TASK [autoware.dev_env.artifacts : Download tensorrt_yolox/yolox_s_car_ped_tl_detector_960_960_batch_1.EntropyV2-calibration.table] ***
+#15 161.6 skipping: [localhost]
+#15 161.7 
+#15 161.7 TASK [autoware.dev_env.artifacts : Download tensorrt/car_ped_tl_detector_labels.txt] ***
+#15 161.7 skipping: [localhost]
+#15 161.7 
+#15 161.7 TASK [autoware.dev_env.artifacts : Create traffic_light_classifier directory inside /root/autoware_data] ***
+#15 161.7 skipping: [localhost]
+#15 161.7 
+#15 161.7 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/traffic_light_classifier_mobilenetv2_batch_1.onnx] ***
+#15 161.7 skipping: [localhost]
+#15 161.7 
+#15 161.7 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/traffic_light_classifier_mobilenetv2_batch_4.onnx] ***
+#15 161.8 skipping: [localhost]
+#15 161.8 
+#15 161.8 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/traffic_light_classifier_mobilenetv2_batch_6.onnx] ***
+#15 161.8 skipping: [localhost]
+#15 161.8 
+#15 161.8 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/traffic_light_classifier_efficientNet_b1_batch_1.onnx] ***
+#15 161.8 skipping: [localhost]
+#15 161.8 
+#15 161.8 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/traffic_light_classifier_efficientNet_b1_batch_4.onnx] ***
+#15 161.8 skipping: [localhost]
+#15 161.9 
+#15 161.9 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/traffic_light_classifier_efficientNet_b1_batch_6.onnx] ***
+#15 161.9 skipping: [localhost]
+#15 161.9 
+#15 161.9 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/ped_traffic_light_classifier_mobilenetv2_batch_1.onnx] ***
+#15 161.9 skipping: [localhost]
+#15 161.9 
+#15 161.9 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/ped_traffic_light_classifier_mobilenetv2_batch_4.onnx] ***
+#15 161.9 skipping: [localhost]
+#15 161.9 
+#15 161.9 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/ped_traffic_light_classifier_mobilenetv2_batch_6.onnx] ***
+#15 161.9 skipping: [localhost]
+#15 161.9 
+#15 161.9 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/lamp_labels.txt] ***
+#15 162.0 skipping: [localhost]
+#15 162.0 
+#15 162.0 TASK [autoware.dev_env.artifacts : Download traffic_light_classifier/lamp_labels_ped.txt] ***
+#15 162.0 skipping: [localhost]
+#15 162.0 
+#15 162.0 TASK [autoware.dev_env.artifacts : Create traffic_light_fine_detector directory inside /root/autoware_data] ***
+#15 162.0 skipping: [localhost]
+#15 162.0 
+#15 162.0 TASK [autoware.dev_env.artifacts : Download traffic_light_fine_detector/tlr_car_ped_yolox_s_batch_1.onnx] ***
+#15 162.0 skipping: [localhost]
+#15 162.0 
+#15 162.0 TASK [autoware.dev_env.artifacts : Download traffic_light_fine_detector/tlr_car_ped_yolox_s_batch_4.onnx] ***
+#15 162.1 skipping: [localhost]
+#15 162.1 
+#15 162.1 TASK [autoware.dev_env.artifacts : Download traffic_light_fine_detector/tlr_car_ped_yolox_s_batch_6.onnx] ***
+#15 162.1 skipping: [localhost]
+#15 162.1 
+#15 162.1 TASK [autoware.dev_env.artifacts : Download traffic_light_fine_detector/tlr_labels.txt] ***
+#15 162.1 skipping: [localhost]
+#15 162.1 
+#15 162.1 PLAY RECAP *********************************************************************
+#15 162.1 localhost                  : ok=14   changed=9    unreachable=0    failed=0    skipped=123  rescued=0    ignored=0   
+#15 162.1 
+#15 162.2 [32mCompleted.[0m
+#15 162.8 WARNING: Skipping ansible as it is not installed.
+#15 162.9 WARNING: Skipping ansible-core as it is not installed.
+#15 162.9 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#15 163.0 Reading package lists...
+#15 167.2 Building dependency tree...
+#15 167.6 Reading state information...
+#15 167.9 0 upgraded, 0 newly installed, 0 to remove and 108 not upgraded.
+#15 DONE 172.9s
+
+#16 [base-cuda base 12/13] COPY docker/etc/ros_entrypoint.sh /ros_entrypoint.sh
+#16 DONE 0.2s
+
+#17 [base-cuda base 13/13] RUN chmod +x /ros_entrypoint.sh
+#17 DONE 0.4s
+
+#18 [base] exporting to image
+#18 exporting layers
+#18 ...
+
+#19 [base-cuda base-cuda 1/1] RUN --mount=type=ssh   ./setup-dev-env.sh -y --module base --download-artifacts --no-cuda-drivers --runtime openadkit   && pip uninstall -y ansible ansible-core   && /autoware/cleanup_apt.sh true
+#19 0.369 [36mRun the setup in non-interactive mode.[m
+#19 0.369 [36mArtifacts will be downloaded to /root/autoware_data[m
+#19 1.619 /root/.local/bin has been been added to PATH, but you need to open a new
+#19 1.619     terminal or re-login for this PATH change to take effect. Alternatively,
+#19 1.619     you can source your shell's config file with e.g. 'source ~/.bashrc'.
+#19 1.619 
+#19 1.619 You will need to open a new terminal or re-login for the PATH changes to take
+#19 1.619 effect. Alternatively, you can source your shell's config file with e.g.
+#19 1.619 'source ~/.bashrc'.
+#19 1.619 
+#19 1.619 Otherwise pipx is ready to go! ✨ 🌟 ✨
+#19 1.892 creating virtual environment...
+#19 2.029 installing ansible from spec 'ansible==6.*'...
+#19 ...
+
+#18 [base] exporting to image
+#18 exporting layers 8.1s done
+#18 writing image sha256:84707aa8f07136989cf3f51b770102f3c82cadec2b8ff47c1d831f62a372a0ca done
+#18 naming to ghcr.io/autowarefoundation/autoware-base:latest done
+#18 DONE 8.2s
+
+#19 [base-cuda base-cuda 1/1] RUN --mount=type=ssh   ./setup-dev-env.sh -y --module base --download-artifacts --no-cuda-drivers --runtime openadkit   && pip uninstall -y ansible ansible-core   && /autoware/cleanup_apt.sh true
+#19 49.84 done! ✨ 🌟 ✨
+#19 49.84 Installing to existing venv 'ansible'
+#19 49.84   installed package ansible 6.7.0, installed using Python 3.10.12
+#19 49.84   These apps are now globally available
+#19 49.84     - ansible
+#19 49.84     - ansible-community
+#19 49.84     - ansible-config
+#19 49.84     - ansible-connection
+#19 49.84     - ansible-console
+#19 49.84     - ansible-doc
+#19 49.84     - ansible-galaxy
+#19 49.84     - ansible-inventory
+#19 49.84     - ansible-playbook
+#19 49.84     - ansible-pull
+#19 49.84     - ansible-test
+#19 49.84     - ansible-vault
+#19 49.87 [36mansible-galaxy collection install -f -r /autoware/ansible-galaxy-requirements.yaml [m
+#19 50.44 Starting galaxy collection install process
+#19 50.44 Process install dependency map
+#19 50.45 Starting collection install process
+#19 50.45 Installing 'autoware.dev_env:0.1.0' to '/root/.ansible/collections/ansible_collections/autoware/dev_env'
+#19 50.49 Created collection for autoware.dev_env:0.1.0 at /root/.ansible/collections/ansible_collections/autoware/dev_env
+#19 50.49 autoware.dev_env:0.1.0 was installed successfully
+#19 50.56 [36mansible-playbook autoware.dev_env.openadkit --extra-vars prompt_install_nvidia=y --extra-vars cuda_install_drivers=false --extra-vars ros2_installation_type=ros-base --extra-vars install_devel=N --extra-vars prompt_download_artifacts=y --extra-vars data_dir=/root/autoware_data --extra-vars module=base --extra-vars rosdistro=humble --extra-vars rmw_implementation=rmw_cyclonedds_cpp --extra-vars base_image=ros:humble-ros-base-jammy --extra-vars autoware_base_image=ghcr.io/autowarefoundation/autoware-base:latest --extra-vars autoware_base_cuda_image=ghcr.io/autowarefoundation/autoware-base:cuda-latest --extra-vars cuda_version=12.4 --extra-vars cudnn_version=8.9.7.29-1+cuda12.2 --extra-vars tensorrt_version=10.3.0.26-1+cuda12.5 --extra-vars pre_commit_clang_format_version=17.0.5 [m
+#19 50.98 [WARNING]: No inventory was parsed, only implicit localhost is available
+#19 50.99 [WARNING]: provided hosts list is empty, only localhost is available. Note that
+#19 50.99 the implicit localhost does not match 'all'
+#19 51.03 [WARNING]: running playbook inside collection autoware.dev_env
+#19 51.24 
+#19 51.24 PLAY [Set up source development environments for Autoware Universe] ************
+#19 51.27 
+#19 51.27 TASK [Gathering Facts] *********************************************************
+#19 52.40 ok: [localhost]
+#19 52.41 
+#19 52.41 TASK [Verify OS] ***************************************************************
+#19 52.44 skipping: [localhost]
+#19 52.45 
+#19 52.45 TASK [Print args] **************************************************************
+#19 52.48 ok: [localhost] => {
+#19 52.48     "msg": [
+#19 52.48         {
+#19 52.48             "module": "base"
+#19 52.48         },
+#19 52.48         {
+#19 52.48             "rosdistro": "humble"
+#19 52.48         },
+#19 52.48         {
+#19 52.48             "rmw_implementation": "rmw_cyclonedds_cpp"
+#19 52.48         },
+#19 52.48         {
+#19 52.48             "cuda_version": "12.4"
+#19 52.48         },
+#19 52.48         {
+#19 52.48             "cudnn_version": "8.9.7.29-1+cuda12.2"
+#19 52.48         },
+#19 52.48         {
+#19 52.48             "tensorrt_version": "10.3.0.26-1+cuda12.5"
+#19 52.48         }
+#19 52.48     ]
+#19 52.48 }
+#19 52.50 
+#19 52.50 TASK [autoware.dev_env.rmw_implementation : Get dash-case name of rmw_implementation] ***
+#19 52.90 ok: [localhost]
+#19 52.91 
+#19 52.91 TASK [autoware.dev_env.rmw_implementation : Hold check of ros-humble-rmw-cyclonedds-cpp] ***
+#19 53.23 ok: [localhost]
+#19 53.25 
+#19 53.25 TASK [autoware.dev_env.rmw_implementation : Install ros-humble-rmw-cyclonedds-cpp] ***
+#19 71.74 ok: [localhost]
+#19 71.76 
+#19 71.76 TASK [autoware.dev_env.rmw_implementation : Display warning if ROS 2 RMW package is held] ***
+#19 71.78 ok: [localhost] => {
+#19 71.78     "msg": "ROS 2 RMW package 'ros-humble-rmw-cyclonedds-cpp' is apt-mark hold. Skipping installation."
+#19 71.78 }
+#19 71.80 
+#19 71.80 TASK [autoware.dev_env.rmw_implementation : Add RMW_IMPLEMENTATION to .bashrc] ***
+#19 72.18 ok: [localhost] => (item=~/.bashrc)
+#19 72.39 ok: [localhost] => (item=/etc/skel/.bashrc)
+#19 72.42 
+#19 72.42 TASK [autoware.dev_env.gdown : Install gdown to download files from CMakeLists.txt] ***
+#19 74.86 ok: [localhost]
+#19 74.88 
+#19 74.88 TASK [autoware.dev_env.kisak_mesa : Install additional dependencies] ***********
+#19 76.56 ok: [localhost]
+#19 76.58 
+#19 76.58 TASK [autoware.dev_env.kisak_mesa : Add Kisak Mesa PPA] ************************
+#19 77.65 ok: [localhost]
+#19 77.66 
+#19 77.66 TASK [autoware.dev_env.kisak_mesa : Install Mesa libraries] ********************
+#19 79.36 ok: [localhost]
+#19 79.39 
+#19 79.39 TASK [autoware.dev_env.pacmod : Install apt-transport-https] *******************
+#19 83.13 ok: [localhost]
+#19 83.14 
+#19 83.14 TASK [autoware.dev_env.pacmod : Save result of 'lsb_release -sc'] **************
+#19 83.43 ok: [localhost]
+#19 83.44 
+#19 83.44 TASK [autoware.dev_env.pacmod : Add AutonomouStuff apt repository to source list] ***
+#19 84.33 ok: [localhost]
+#19 84.35 
+#19 84.35 TASK [autoware.dev_env.pacmod : Add AutonomouStuff rosdep yaml] ****************
+#19 84.63 ok: [localhost]
+#19 84.65 
+#19 84.65 TASK [autoware.dev_env.build_tools : Install ccache] ***************************
+#19 84.67 skipping: [localhost]
+#19 84.68 
+#19 84.68 TASK [autoware.dev_env.build_tools : Add CCACHE_DIR to .bashrc] ****************
+#19 84.70 skipping: [localhost]
+#19 84.71 
+#19 84.71 TASK [autoware.dev_env.build_tools : Add CCACHE_DIR to .bashrc of local user] ***
+#19 84.73 skipping: [localhost]
+#19 84.74 
+#19 84.74 TASK [autoware.dev_env.build_tools : Export CC to ccache] **********************
+#19 84.75 skipping: [localhost]
+#19 84.77 
+#19 84.77 TASK [autoware.dev_env.build_tools : Export CXX to ccache] *********************
+#19 84.78 skipping: [localhost]
+#19 84.79 
+#19 84.79 TASK [autoware.dev_env.build_tools : Create ccache directory] ******************
+#19 84.81 skipping: [localhost]
+#19 84.82 
+#19 84.82 TASK [autoware.dev_env.build_tools : Source .bashrc] ***************************
+#19 84.84 skipping: [localhost]
+#19 84.86 
+#19 84.86 TASK [autoware.dev_env.geographiclib : Install geographiclib-tools] ************
+#19 84.88 skipping: [localhost]
+#19 84.89 
+#19 84.89 TASK [autoware.dev_env.geographiclib : Install egm2008-1] **********************
+#19 84.90 skipping: [localhost]
+#19 84.92 
+#19 84.92 TASK [autoware.dev_env.cuda : Get CUDA architecture name] **********************
+#19 85.15 ok: [localhost]
+#19 85.16 
+#19 85.16 TASK [autoware.dev_env.cuda : Remove old /etc/apt/sources.list.d/cuda.list] ****
+#19 85.56 ok: [localhost]
+#19 85.57 
+#19 85.57 TASK [autoware.dev_env.cuda : Install CUDA keyring] ****************************
+#19 93.11 changed: [localhost]
+#19 93.13 
+#19 93.13 TASK [autoware.dev_env.cuda : Get dash-case name of cuda_version] **************
+#19 93.38 ok: [localhost]
+#19 93.40 
+#19 93.40 TASK [autoware.dev_env.cuda : Install CUDA devel libraries except for cuda-drivers] ***
+#19 93.41 skipping: [localhost]
+#19 93.43 
+#19 93.43 TASK [autoware.dev_env.cuda : Install CUDA libraries except for cuda-drivers] ***
+#19 269.2 fatal: [localhost]: FAILED! => {"cache_update_time": 1758539078, "cache_updated": true, "changed": false, "msg": "'/usr/bin/apt-get -y -o \"Dpkg::Options::=--force-confdef\" -o \"Dpkg::Options::=--force-confold\"       install 'cuda-minimal-build-12-4=12.4.1-1' 'libcusparse-12-4=12.3.1.170-1' 'libcublas-12-4=12.4.5.8-1' 'libcurand-12-4=10.3.5.147-1'' failed: E: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa/./libcublas-12-4_12.4.5.8-1_arm64.deb  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n", "rc": 100, "stderr": "E: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa/./libcublas-12-4_12.4.5.8-1_arm64.deb  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n", "stderr_lines": ["E: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa/./libcublas-12-4_12.4.5.8-1_arm64.deb  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]", "E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?"], "stdout": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nThe following additional packages will be installed:\n  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4\n  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4\n  cuda-driver-dev-12-4 cuda-nvcc-12-4 cuda-nvprune-12-4 cuda-nvvm-12-4\n  cuda-profiler-api-12-4 cuda-toolkit-12-4-config-common\n  cuda-toolkit-12-config-common cuda-toolkit-config-common\nThe following NEW packages will be installed:\n  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4\n  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4\n  cuda-driver-dev-12-4 cuda-minimal-build-12-4 cuda-nvcc-12-4\n  cuda-nvprune-12-4 cuda-nvvm-12-4 cuda-profiler-api-12-4\n  cuda-toolkit-12-4-config-common cuda-toolkit-12-config-common\n  cuda-toolkit-config-common libcublas-12-4 libcurand-12-4 libcusparse-12-4\n0 upgraded, 19 newly installed, 0 to remove and 108 not upgraded.\nNeed to get 434 MB of archives.\nAfter this operation, 1136 MB of additional disk space will be used.\nGet:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cccl-12-4 12.4.127-1 [1199 kB]\nGet:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuobjdump-12-4 12.4.127-1 [216 kB]\nGet:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuxxfilt-12-4 12.4.127-1 [179 kB]\nGet:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-config-common 13.0.88-1 [17.4 kB]\nGet:5 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-config-common 12.9.79-1 [16.6 kB]\nGet:6 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-4-config-common 12.4.127-1 [16.4 kB]\nGet:7 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-12-4 12.4.127-1 [167 kB]\nGet:8 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-driver-dev-12-4 12.4.127-1 [29.8 kB]\nGet:9 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-dev-12-4 12.4.127-1 [988 kB]\nGet:10 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvvm-12-4 12.4.131-1 [17.4 MB]\nGet:11 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-crt-12-4 12.4.131-1 [78.0 kB]\nGet:12 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvcc-12-4 12.4.131-1 [27.8 MB]\nGet:13 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvprune-12-4 12.4.127-1 [50.7 kB]\nGet:14 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-compiler-12-4 12.4.1-1 [2510 B]\nGet:15 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-profiler-api-12-4 12.4.127-1 [18.7 kB]\nGet:16 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-minimal-build-12-4 12.4.1-1 [2530 B]\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nIgn:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\nGet:18 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcurand-12-4 10.3.5.147-1 [41.4 MB]\nGet:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]\nIgn:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nIgn:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\nGet:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]\nIgn:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nIgn:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\nGet:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nErr:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\n  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]\nFetched 90.7 MB in 2min 42s (559 kB/s)\n", "stdout_lines": ["Reading package lists...", "Building dependency tree...", "Reading state information...", "The following additional packages will be installed:", "  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4", "  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4", "  cuda-driver-dev-12-4 cuda-nvcc-12-4 cuda-nvprune-12-4 cuda-nvvm-12-4", "  cuda-profiler-api-12-4 cuda-toolkit-12-4-config-common", "  cuda-toolkit-12-config-common cuda-toolkit-config-common", "The following NEW packages will be installed:", "  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4", "  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4", "  cuda-driver-dev-12-4 cuda-minimal-build-12-4 cuda-nvcc-12-4", "  cuda-nvprune-12-4 cuda-nvvm-12-4 cuda-profiler-api-12-4", "  cuda-toolkit-12-4-config-common cuda-toolkit-12-config-common", "  cuda-toolkit-config-common libcublas-12-4 libcurand-12-4 libcusparse-12-4", "0 upgraded, 19 newly installed, 0 to remove and 108 not upgraded.", "Need to get 434 MB of archives.", "After this operation, 1136 MB of additional disk space will be used.", "Get:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cccl-12-4 12.4.127-1 [1199 kB]", "Get:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuobjdump-12-4 12.4.127-1 [216 kB]", "Get:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuxxfilt-12-4 12.4.127-1 [179 kB]", "Get:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-config-common 13.0.88-1 [17.4 kB]", "Get:5 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-config-common 12.9.79-1 [16.6 kB]", "Get:6 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-4-config-common 12.4.127-1 [16.4 kB]", "Get:7 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-12-4 12.4.127-1 [167 kB]", "Get:8 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-driver-dev-12-4 12.4.127-1 [29.8 kB]", "Get:9 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-dev-12-4 12.4.127-1 [988 kB]", "Get:10 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvvm-12-4 12.4.131-1 [17.4 MB]", "Get:11 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-crt-12-4 12.4.131-1 [78.0 kB]", "Get:12 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvcc-12-4 12.4.131-1 [27.8 MB]", "Get:13 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvprune-12-4 12.4.127-1 [50.7 kB]", "Get:14 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-compiler-12-4 12.4.1-1 [2510 B]", "Get:15 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-profiler-api-12-4 12.4.127-1 [18.7 kB]", "Get:16 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-minimal-build-12-4 12.4.1-1 [2530 B]", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Ign:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "Get:18 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcurand-12-4 10.3.5.147-1 [41.4 MB]", "Get:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]", "Ign:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Ign:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "Get:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]", "Ign:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Ign:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "Get:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Err:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]", "Fetched 90.7 MB in 2min 42s (559 kB/s)"]}
+#19 269.2 
+#19 269.2 PLAY RECAP *********************************************************************
+#19 269.2 localhost                  : ok=19   changed=1    unreachable=0    failed=1    skipped=11   rescued=0    ignored=0   
+#19 269.2 
+#19 269.2 [31mFailed.[0m
+#19 ERROR: process "/bin/bash -o pipefail -c ./setup-dev-env.sh -y --module base --download-artifacts --no-cuda-drivers --runtime openadkit   && pip uninstall -y ansible ansible-core   && /autoware/cleanup_apt.sh true" did not complete successfully: exit code: 1
+------
+ > [base-cuda base-cuda 1/1] RUN --mount=type=ssh   ./setup-dev-env.sh -y --module base --download-artifacts --no-cuda-drivers --runtime openadkit   && pip uninstall -y ansible ansible-core   && /autoware/cleanup_apt.sh true:
+93.40 TASK [autoware.dev_env.cuda : Install CUDA devel libraries except for cuda-drivers] ***
+93.41 skipping: [localhost]
+93.43 
+93.43 TASK [autoware.dev_env.cuda : Install CUDA libraries except for cuda-drivers] ***
+269.2 fatal: [localhost]: FAILED! => {"cache_update_time": 1758539078, "cache_updated": true, "changed": false, "msg": "'/usr/bin/apt-get -y -o \"Dpkg::Options::=--force-confdef\" -o \"Dpkg::Options::=--force-confold\"       install 'cuda-minimal-build-12-4=12.4.1-1' 'libcusparse-12-4=12.3.1.170-1' 'libcublas-12-4=12.4.5.8-1' 'libcurand-12-4=10.3.5.147-1'' failed: E: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa/./libcublas-12-4_12.4.5.8-1_arm64.deb  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n", "rc": 100, "stderr": "E: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa/./libcublas-12-4_12.4.5.8-1_arm64.deb  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n", "stderr_lines": ["E: Failed to fetch https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa/./libcublas-12-4_12.4.5.8-1_arm64.deb  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]", "E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?"], "stdout": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nThe following additional packages will be installed:\n  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4\n  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4\n  cuda-driver-dev-12-4 cuda-nvcc-12-4 cuda-nvprune-12-4 cuda-nvvm-12-4\n  cuda-profiler-api-12-4 cuda-toolkit-12-4-config-common\n  cuda-toolkit-12-config-common cuda-toolkit-config-common\nThe following NEW packages will be installed:\n  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4\n  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4\n  cuda-driver-dev-12-4 cuda-minimal-build-12-4 cuda-nvcc-12-4\n  cuda-nvprune-12-4 cuda-nvvm-12-4 cuda-profiler-api-12-4\n  cuda-toolkit-12-4-config-common cuda-toolkit-12-config-common\n  cuda-toolkit-config-common libcublas-12-4 libcurand-12-4 libcusparse-12-4\n0 upgraded, 19 newly installed, 0 to remove and 108 not upgraded.\nNeed to get 434 MB of archives.\nAfter this operation, 1136 MB of additional disk space will be used.\nGet:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cccl-12-4 12.4.127-1 [1199 kB]\nGet:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuobjdump-12-4 12.4.127-1 [216 kB]\nGet:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuxxfilt-12-4 12.4.127-1 [179 kB]\nGet:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-config-common 13.0.88-1 [17.4 kB]\nGet:5 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-config-common 12.9.79-1 [16.6 kB]\nGet:6 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-4-config-common 12.4.127-1 [16.4 kB]\nGet:7 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-12-4 12.4.127-1 [167 kB]\nGet:8 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-driver-dev-12-4 12.4.127-1 [29.8 kB]\nGet:9 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-dev-12-4 12.4.127-1 [988 kB]\nGet:10 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvvm-12-4 12.4.131-1 [17.4 MB]\nGet:11 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-crt-12-4 12.4.131-1 [78.0 kB]\nGet:12 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvcc-12-4 12.4.131-1 [27.8 MB]\nGet:13 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvprune-12-4 12.4.127-1 [50.7 kB]\nGet:14 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-compiler-12-4 12.4.1-1 [2510 B]\nGet:15 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-profiler-api-12-4 12.4.127-1 [18.7 kB]\nGet:16 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-minimal-build-12-4 12.4.1-1 [2530 B]\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nIgn:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\nGet:18 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcurand-12-4 10.3.5.147-1 [41.4 MB]\nGet:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]\nIgn:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nIgn:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\nGet:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]\nIgn:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nIgn:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\nGet:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]\nGet:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]\nErr:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1\n  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]\nFetched 90.7 MB in 2min 42s (559 kB/s)\n", "stdout_lines": ["Reading package lists...", "Building dependency tree...", "Reading state information...", "The following additional packages will be installed:", "  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4", "  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4", "  cuda-driver-dev-12-4 cuda-nvcc-12-4 cuda-nvprune-12-4 cuda-nvvm-12-4", "  cuda-profiler-api-12-4 cuda-toolkit-12-4-config-common", "  cuda-toolkit-12-config-common cuda-toolkit-config-common", "The following NEW packages will be installed:", "  cuda-cccl-12-4 cuda-compiler-12-4 cuda-crt-12-4 cuda-cudart-12-4", "  cuda-cudart-dev-12-4 cuda-cuobjdump-12-4 cuda-cuxxfilt-12-4", "  cuda-driver-dev-12-4 cuda-minimal-build-12-4 cuda-nvcc-12-4", "  cuda-nvprune-12-4 cuda-nvvm-12-4 cuda-profiler-api-12-4", "  cuda-toolkit-12-4-config-common cuda-toolkit-12-config-common", "  cuda-toolkit-config-common libcublas-12-4 libcurand-12-4 libcusparse-12-4", "0 upgraded, 19 newly installed, 0 to remove and 108 not upgraded.", "Need to get 434 MB of archives.", "After this operation, 1136 MB of additional disk space will be used.", "Get:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cccl-12-4 12.4.127-1 [1199 kB]", "Get:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuobjdump-12-4 12.4.127-1 [216 kB]", "Get:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cuxxfilt-12-4 12.4.127-1 [179 kB]", "Get:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-config-common 13.0.88-1 [17.4 kB]", "Get:5 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-config-common 12.9.79-1 [16.6 kB]", "Get:6 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-toolkit-12-4-config-common 12.4.127-1 [16.4 kB]", "Get:7 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-12-4 12.4.127-1 [167 kB]", "Get:8 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-driver-dev-12-4 12.4.127-1 [29.8 kB]", "Get:9 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-cudart-dev-12-4 12.4.127-1 [988 kB]", "Get:10 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvvm-12-4 12.4.131-1 [17.4 MB]", "Get:11 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-crt-12-4 12.4.131-1 [78.0 kB]", "Get:12 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvcc-12-4 12.4.131-1 [27.8 MB]", "Get:13 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-nvprune-12-4 12.4.127-1 [50.7 kB]", "Get:14 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-compiler-12-4 12.4.1-1 [2510 B]", "Get:15 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-profiler-api-12-4 12.4.127-1 [18.7 kB]", "Get:16 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  cuda-minimal-build-12-4 12.4.1-1 [2530 B]", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Ign:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "Get:18 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcurand-12-4 10.3.5.147-1 [41.4 MB]", "Get:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]", "Ign:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Ign:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "Get:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]", "Ign:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Ign:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "Get:19 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcusparse-12-4 12.3.1.170-1 [114 MB]", "Get:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1 [230 MB]", "Err:17 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/sbsa  libcublas-12-4 12.4.5.8-1", "  Error reading from server - read (5: Input/output error) [IP: 125.56.218.71 443]", "Fetched 90.7 MB in 2min 42s (559 kB/s)"]}
+269.2 
+269.2 PLAY RECAP *********************************************************************
+269.2 localhost                  : ok=19   changed=1    unreachable=0    failed=1    skipped=11   rescued=0    ignored=0   
+269.2 
+269.2 [31mFailed.[0m
+------
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $BASE_IMAGE results in empty or invalid base image name (line 4)
+Dockerfile.base:46
+--------------------
+  45 |     # hadolint ignore=SC2002
+  46 | >>> RUN --mount=type=ssh \
+  47 | >>>   ./setup-dev-env.sh -y --module base --download-artifacts --no-cuda-drivers --runtime openadkit \
+  48 | >>>   && pip uninstall -y ansible ansible-core \
+  49 | >>>   && /autoware/cleanup_apt.sh true
+  50 |     
+--------------------
+ERROR: target base-cuda: failed to solve: process "/bin/bash -o pipefail -c ./setup-dev-env.sh -y --module base --download-artifacts --no-cuda-drivers --runtime openadkit   && pip uninstall -y ansible ansible-core   && /autoware/cleanup_apt.sh true" did not complete successfully: exit code: 1
