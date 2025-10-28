@@ -113,7 +113,7 @@ set_variables() {
         fi
     else
         # Set image based on option
-        IMAGE="ghcr.io/autowarefoundation/autoware:universe"
+        IMAGE="katechoss/autoware:universe"
 
         # Set map path
         if [ "$MAP_PATH" = "" ]; then
